@@ -12,3 +12,5 @@ plotly
 streamlit
 streamlit-folium
 tropycal
+# Add to requirements.txt
+setuptools==68.2.2
