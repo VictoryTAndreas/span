@@ -1,7 +1,9 @@
 ﻿--find-links=https://girder.github.io/large_image_wheels
 GDAL
 folium==0.13.0
+fiona
 geemap
+geemap-foliumap
 geopandas
 leafmap
 localtileserver

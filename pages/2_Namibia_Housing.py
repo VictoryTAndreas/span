@@ -12,6 +12,7 @@ from leafmap.common import hex_to_rgb
 import xml.etree.ElementTree as ET
 from shapely.geometry import Point, Polygon
 import json
+import tempfile
 
 st.set_page_config(layout="wide")
 
@@ -29,10 +30,16 @@ st.sidebar.info(
     """
 )
 
-STREAMLIT_STATIC_PATH = pathlib.Path(st.__path__[0]) / "static"
-DOWNLOADS_PATH = STREAMLIT_STATIC_PATH / "downloads"
-if not DOWNLOADS_PATH.is_dir():
-    DOWNLOADS_PATH.mkdir()
+# FIXED: Use temp directory instead of Streamlit static path
+try:
+    # Use temporary directory that's always writable on Streamlit Cloud
+    DOWNLOADS_PATH = pathlib.Path(tempfile.gettempdir()) / "namibia_downloads"
+    DOWNLOADS_PATH.mkdir(exist_ok=True, parents=True)
+except Exception as e:
+    st.warning(f"Could not create temp directory: {e}")
+    # Fallback to current directory
+    DOWNLOADS_PATH = pathlib.Path.cwd() / "downloads"
+    DOWNLOADS_PATH.mkdir(exist_ok=True)
 
 # NSDI Digital Namibia WFS endpoint
 NSDI_WFS_URL = "https://digitalnamibia.nsa.org.na/geoserver/ows"
