@@ -383,7 +383,7 @@ def join_namibia_data(gdf, df, join_col="region"):
 
 
 def app():
-    st.title("🏠 Namibia Population, Housing & Market Trends Dashboard")
+    st.title("Namibia Population, Housing & Market Trends Dashboard")
     st.markdown(
         """
         **Introduction:** This interactive dashboard provides insights into Namibia's demographic, housing, and economic trends 
@@ -397,9 +397,6 @@ def app():
         - Urban/rural distribution
         """
     )
-
-    with st.expander("📹 See a demo"):
-        st.image("https://i.imgur.com/Z3dk6Tr.gif")
 
     # Main controls
     row1_col1, row1_col2, row1_col3, row1_col4 = st.columns([1, 1, 1, 2])
@@ -461,7 +458,7 @@ def app():
                 "gdp_contribution_percent": "Region's contribution to national GDP"
             }
             desc = descriptions.get(selected_col, "No description available")
-            st.markdown(f"**📊 {selected_col.replace('_', ' ').title()}**")
+            st.markdown(f"**{selected_col.replace('_', ' ').title()}**")
             st.markdown(f"*{desc}*")
 
     # Load geospatial data
