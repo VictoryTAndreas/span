@@ -1,9 +1,17 @@
+import ee
 import folium
 import pandas as pd
 import streamlit as st
 import leafmap.foliumap as leafmap
 import folium.plugins as plugins
+import json
 
+service_account = st.secrets["earthengine"]["json"]
+credentials = ee.ServiceAccountCredentials(
+    json.loads(service_account)["client_email"],
+    key_data=service_account
+)
+ee.Initialize(credentials)
 st.set_page_config(layout="wide")
 
 st.sidebar.info(

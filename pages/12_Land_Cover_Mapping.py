@@ -2,6 +2,14 @@ import datetime
 import ee
 import streamlit as st
 import geemap.foliumap as geemap
+import json
+
+service_account = st.secrets["earthengine"]["json"]
+credentials = ee.ServiceAccountCredentials(
+    json.loads(service_account)["client_email"],
+    key_data=service_account
+)
+ee.Initialize(credentials)
 
 st.set_page_config(layout="wide")
 
