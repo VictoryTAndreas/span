@@ -1,5 +1,4 @@
-﻿--find-links=https://girder.github.io/large_image_wheels
-streamlit
+﻿streamlit
 GDAL
 fiona
 folium==0.13.0
