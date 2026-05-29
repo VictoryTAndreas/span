@@ -1,4 +1,4 @@
-import ee
+﻿import ee
 import json
 import os
 import warnings
@@ -616,12 +616,12 @@ def app():
     with row1_col1:
 
         with st.expander(
-            "Steps: Draw a rectangle on the map -> Export it as a GeoJSON -> Upload it back to the app -> Click the Submit button. Expand this tab to see a demo 👉"
+            "Steps: Draw a rectangle on the map -> Export it as a GeoJSON -> Upload it back to the app -> Click the Submit button. Expand this tab to see a demo ðŸ‘‰"
         ):
             video_empty = st.empty()
 
         data = st.file_uploader(
-            "Upload a GeoJSON file to use as an ROI. Customize timelapse parameters and then click the Submit button 😇👇",
+            "Upload a GeoJSON file to use as an ROI. Customize timelapse parameters and then click the Submit button ðŸ˜‡ðŸ‘‡",
             type=["geojson", "kml", "zip"],
         )
 
@@ -699,7 +699,7 @@ def app():
                 st.error("Please draw another ROI and try again.")
                 return
 
-        m.to_streamlit(height=600)
+        m.to_streamlit(height=600, responsive=True)
 
     with row1_col2:
 
@@ -883,7 +883,7 @@ def app():
                         if out_gif is not None and os.path.exists(out_gif):
 
                             empty_text.text(
-                                "Right click the GIF to save it to your computer👇"
+                                "Right click the GIF to save it to your computerðŸ‘‡"
                             )
                             empty_image.image(out_gif)
 
@@ -891,7 +891,7 @@ def app():
                             if mp4 and os.path.exists(out_mp4):
                                 with empty_video:
                                     st.text(
-                                        "Right click the MP4 to save it to your computer👇"
+                                        "Right click the MP4 to save it to your computerðŸ‘‡"
                                     )
                                     st.video(out_gif.replace(".gif", ".mp4"))
 
@@ -1020,7 +1020,7 @@ def app():
 
                         if out_gif is not None and os.path.exists(out_gif):
                             empty_text.text(
-                                "Right click the GIF to save it to your computer👇"
+                                "Right click the GIF to save it to your computerðŸ‘‡"
                             )
                             empty_image.image(out_gif)
 
@@ -1028,7 +1028,7 @@ def app():
                             if mp4 and os.path.exists(out_mp4):
                                 with empty_video:
                                     st.text(
-                                        "Right click the MP4 to save it to your computer👇"
+                                        "Right click the MP4 to save it to your computerðŸ‘‡"
                                     )
                                     st.video(out_gif.replace(".gif", ".mp4"))
 
@@ -1140,7 +1140,7 @@ def app():
                         geemap.reduce_gif_size(out_gif)
 
                         empty_text.text(
-                            "Right click the GIF to save it to your computer👇"
+                            "Right click the GIF to save it to your computerðŸ‘‡"
                         )
                         empty_image.image(out_gif)
 
@@ -1148,7 +1148,7 @@ def app():
                         if mp4 and os.path.exists(out_mp4):
                             with empty_video:
                                 st.text(
-                                    "Right click the MP4 to save it to your computer👇"
+                                    "Right click the MP4 to save it to your computerðŸ‘‡"
                                 )
                                 st.video(out_gif.replace(".gif", ".mp4"))
 
@@ -1272,7 +1272,7 @@ def app():
                             )
 
                         empty_text.text(
-                            "Right click the GIF to save it to your computer👇"
+                            "Right click the GIF to save it to your computerðŸ‘‡"
                         )
                         empty_image.image(out_gif)
 
@@ -1280,7 +1280,7 @@ def app():
                         if mp4 and os.path.exists(out_mp4):
                             with empty_video:
                                 st.text(
-                                    "Right click the MP4 to save it to your computer👇"
+                                    "Right click the MP4 to save it to your computerðŸ‘‡"
                                 )
                                 st.video(out_gif.replace(".gif", ".mp4"))
 
@@ -1333,7 +1333,7 @@ def app():
                     )
                     add_colorbar = st.checkbox("Add a colorbar", True)
                     colorbar_label = st.text_input(
-                        "Enter the colorbar label:", "Surface Temperature (°C)"
+                        "Enter the colorbar label:", "Surface Temperature (Â°C)"
                     )
                     fading = st.slider(
                         "Fading duration (seconds) for each frame:", 0.0, 3.0, 0.0
@@ -1455,7 +1455,7 @@ def app():
                             geemap.reduce_gif_size(out_gif)
 
                             empty_text.text(
-                                "Right click the GIF to save it to your computer👇"
+                                "Right click the GIF to save it to your computerðŸ‘‡"
                             )
                             empty_image.image(out_gif)
 
@@ -1463,7 +1463,7 @@ def app():
                             if mp4 and os.path.exists(out_mp4):
                                 with empty_video:
                                     st.text(
-                                        "Right click the MP4 to save it to your computer👇"
+                                        "Right click the MP4 to save it to your computerðŸ‘‡"
                                     )
                                     st.video(out_gif.replace(".gif", ".mp4"))
 
@@ -1568,7 +1568,7 @@ def app():
                         if out_gif is not None and os.path.exists(out_gif):
 
                             empty_text.text(
-                                "Right click the GIF to save it to your computer👇"
+                                "Right click the GIF to save it to your computerðŸ‘‡"
                             )
                             empty_image.image(out_gif)
 
@@ -1576,7 +1576,7 @@ def app():
                             if mp4 and os.path.exists(out_mp4):
                                 with empty_video:
                                     st.text(
-                                        "Right click the MP4 to save it to your computer👇"
+                                        "Right click the MP4 to save it to your computerðŸ‘‡"
                                     )
                                     st.video(out_gif.replace(".gif", ".mp4"))
 
