@@ -1,13 +1,16 @@
-﻿streamlit
+﻿--find-links=https://girder.github.io/large_image_wheels
+GDAL
+fiona
 folium==0.13.0
-geemap==0.33.0
-ipython==8.12.3
-ipywidgets==8.1.1
+geemap
 geopandas
-leafmap==0.30.0
+leafmap
+localtileserver
 owslib
 palettable
 plotly
+streamlit
 streamlit-folium
 tropycal
+# Add to requirements.txt
 setuptools==68.2.2
