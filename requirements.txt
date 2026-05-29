@@ -1,4 +1,4 @@
-﻿streamlit
+streamlit
 GDAL
 fiona
 folium==0.13.0
