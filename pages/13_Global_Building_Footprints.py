@@ -2,13 +2,16 @@ import ee
 import geemap.foliumap as geemap
 import geopandas as gpd
 import streamlit as st
+import json
+
+service_account = st.secrets["earthengine"]["json"]
+credentials = ee.ServiceAccountCredentials(
+    json.loads(service_account)["client_email"],
+    key_data=service_account
+)
+ee.Initialize(credentials)
 
 st.set_page_config(layout="wide")
-
-
-def ee_authenticate(token_name="EARTHENGINE_TOKEN"):
-    geemap.ee_initialize(token_name=token_name)
-
 
 st.sidebar.info(
     """
@@ -20,7 +23,11 @@ st.sidebar.info(
 st.sidebar.title("Contact")
 st.sidebar.info(
     """
-    VTA Namibia at [vtanamibia.com](https://www.vtanamibia.com) | [GitHub](https://github.com/VictoryTAndreas) | [Twitter](https://twitter.com/vicanddotvta) | [YouTube](https://youtube.com/@vtastudios) | [LinkedIn](https://www.linkedin.com/https://www.linkedin.com/company/vta-labs-studios/?originalSubdomain=na)
+    VTA Namibia at [vtanamibia.com](https://www.vtanamibia.com) | 
+    [GitHub](https://github.com/VictoryTAndreas) | 
+    [Twitter](https://twitter.com/vicanddotvta) | 
+    [YouTube](https://youtube.com/@vtastudios) | 
+    [LinkedIn](https://www.linkedin.com/company/vta-labs-studios/?originalSubdomain=na)
     """
 )
 
@@ -34,9 +41,7 @@ def read_data(url):
     return gpd.read_file(url)
 
 
-countries = (
-    "https://github.com/giswqs/geemap/raw/master/examples/data/countries.geojson"
-)
+countries = "https://github.com/giswqs/geemap/raw/master/examples/data/countries.geojson"
 states = "https://github.com/giswqs/geemap/raw/master/examples/data/us_states.json"
 
 countries_gdf = read_data(countries)
@@ -63,31 +68,31 @@ with col2:
         "Select a country", country_names, index=country_names.index("USA")
     )
 
+    fc = None  # guard against undefined reference below
+
     if country == "USA":
         state = st.selectbox(
             "Select a state", state_names, index=state_names.index("Florida")
         )
         layer_name = state
-
         try:
             fc = ee.FeatureCollection(
                 f"projects/sat-io/open-datasets/MSBuildings/US/{state}"
             )
-        except:
-            st.error("No data available for the selected state.")
-
+        except Exception as e:
+            st.error(f"No data available for the selected state: {e}")
+            st.stop()
     else:
+        layer_name = country
         try:
             fc = ee.FeatureCollection(
                 f"projects/sat-io/open-datasets/MSBuildings/{country}"
             )
-        except:
-            st.error("No data available for the selected country.")
-
-        layer_name = country
+        except Exception as e:
+            st.error(f"No data available for the selected country: {e}")
+            st.stop()
 
     color = st.color_picker("Select a color", "#FF5500")
-
     style = {"fillColor": "00000000", "color": color}
 
     split = st.checkbox("Split-panel map")
@@ -108,7 +113,5 @@ with col2:
             """
         )
 
-
 with col1:
-
     Map.to_streamlit(height=1000)

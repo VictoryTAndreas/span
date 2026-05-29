@@ -23,7 +23,11 @@ st.sidebar.info(
 st.sidebar.title("Contact")
 st.sidebar.info(
     """
-    VTA Namibia at [vtanamibia.com](https://www.vtanamibia.com) | [GitHub](https://github.com/VictoryTAndreas) | [Twitter](https://twitter.com/vicanddotvta) | [YouTube](https://youtube.com/@vtastudios) | [LinkedIn](https://www.linkedin.com/https://www.linkedin.com/company/vta-labs-studios/?originalSubdomain=na)
+    VTA Namibia at [vtanamibia.com](https://www.vtanamibia.com) | 
+    [GitHub](https://github.com/VictoryTAndreas) | 
+    [Twitter](https://twitter.com/vicanddotvta) | 
+    [YouTube](https://youtube.com/@vtastudios) | 
+    [LinkedIn](https://www.linkedin.com/company/vta-labs-studios/?originalSubdomain=na)
     """
 )
 
@@ -38,7 +42,6 @@ Map.add_basemap("HYBRID")
 
 esa = ee.ImageCollection("ESA/WorldCover/v100").first()
 esa_vis = {"bands": ["Map"]}
-
 
 esri = ee.ImageCollection(
     "projects/sat-io/open-datasets/landcover/ESRI_Global-LULC_10m"
@@ -60,16 +63,13 @@ esri_vis = {
     ],
 }
 
-
 markdown = """
-    - [Dynamic World Land Cover](https://developers.google.com/earth-engine/datasets/catalog/GOOGLE_DYNAMICWORLD_V1?hl=en)
-    - [ESA Global Land Cover](https://developers.google.com/earth-engine/datasets/catalog/ESA_WorldCover_v100)
-    - [ESRI Global Land Cover](https://samapriya.github.io/awesome-gee-community-datasets/projects/esrilc2020)
-
+- [Dynamic World Land Cover](https://developers.google.com/earth-engine/datasets/catalog/GOOGLE_DYNAMICWORLD_V1?hl=en)
+- [ESA Global Land Cover](https://developers.google.com/earth-engine/datasets/catalog/ESA_WorldCover_v100)
+- [ESRI Global Land Cover](https://samapriya.github.io/awesome-gee-community-datasets/projects/esrilc2020)
 """
 
 with col2:
-
     longitude = st.number_input("Longitude", -180.0, 180.0, -89.3998)
     latitude = st.number_input("Latitude", -90.0, 90.0, 43.0886)
     zoom = st.number_input("Zoom", 0, 20, 11)
@@ -86,7 +86,6 @@ with col2:
     dw = geemap.dynamic_world(region, start_date, end_date, return_type="hillshade")
 
     layers = {
-        
         "Dynamic World": geemap.ee_tile_layer(dw, {}, "Dynamic World Land Cover"),
         "ESA Land Cover": geemap.ee_tile_layer(esa, esa_vis, "ESA Land Cover"),
         "ESRI Land Cover": geemap.ee_tile_layer(esri, esri_vis, "ESRI Land Cover"),
@@ -101,7 +100,7 @@ with col2:
 
     Map.split_map(left_layer, right_layer)
 
-"""
+    # Legend — now active (was accidentally inside triple quotes before)
     legend = st.selectbox("Select a legend", options, index=options.index(right))
     if legend == "Dynamic World":
         Map.add_legend(
@@ -116,6 +115,5 @@ with col2:
     with st.expander("Data sources"):
         st.markdown(markdown)
 
-"""
 with col1:
     Map.to_streamlit(height=750)
