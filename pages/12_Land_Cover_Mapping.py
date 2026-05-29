@@ -4,7 +4,7 @@ import streamlit as st
 import geemap.foliumap as geemap
 import json
 
-service_account = st.secrets["earthengine"]["json"]
+service_account = st.secrets["earthengine"]["json"].replace("\\n", "\n")
 credentials = ee.ServiceAccountCredentials(
     json.loads(service_account)["client_email"],
     key_data=service_account
